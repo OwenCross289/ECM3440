@@ -12,6 +12,11 @@ This project works with a soil moisture sensor emulator. It is part of our ECM34
 - 2 people must approve a pull request
 - All comments must be resolved
 
+### Branching Rules
+- All branches will start with 'ECM-'
+- The number of the branch will be associated with the ticket of the story
+- e.g. ECM-1
+
 ### Automated Pipelines
 - Build runs on latest version of Ubuntu available on Github
 - Build checks out and uses Python 3.10
