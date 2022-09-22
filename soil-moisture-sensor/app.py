@@ -39,3 +39,5 @@ while True:
     device_client.send_message(message)
 
     time.sleep(10)
+
+    (
