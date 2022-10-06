@@ -1,4 +1,0 @@
-azure-iot-device
-CounterFit
-counterfit-connection
-counterfit-shims-grove
