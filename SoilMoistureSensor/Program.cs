@@ -1,5 +1,7 @@
 ﻿using Microsoft.Azure.Devices.Client;
 
+Console.WriteLine();
+
 // var conn = Microsoft.Azure.Devices.Client.IotHubConnectionStringBuilder.Create("");
 // var client = Microsoft.Azure.Devices.Client.DeviceClient.Create(conn);
 
