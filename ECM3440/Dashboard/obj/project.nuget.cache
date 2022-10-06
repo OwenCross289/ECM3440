@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "uS89aOPYz9qsF/ZSS49ZapsUOsfQfoGE7fgCAMQElixo6O0DMTXCzsY+wOStNOnU1s892jyVBjd2e7Ar2tekZg==",
+  "success": true,
+  "projectFilePath": "D:\\Repos\\ECM3440\\ECM3440\\Dashboard\\Dashboard.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\jacob\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\5.0.17\\microsoft.netcore.app.host.win-x64.5.0.17.nupkg.sha512"
+  ],
+  "logs": []
+}
