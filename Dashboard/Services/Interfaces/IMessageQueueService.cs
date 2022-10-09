@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Dashboard.Models;
 
 namespace Dashboard.Services.Interfaces;
@@ -6,6 +7,6 @@ namespace Dashboard.Services.Interfaces;
 public interface IMessageQueueService
 {
     void Connect();
-    void Disconnect();
-    IEnumerable<SoilMoisture> GetData();
+    Task Disconnect();
+    Task<SoilMoisture> GetData();
 }

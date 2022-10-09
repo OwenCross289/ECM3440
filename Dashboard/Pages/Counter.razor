@@ -1,17 +1,29 @@
 ﻿@page "/counter"
+@using Dashboard.Services.Interfaces
+@inject IMessageQueueService MessageQueueService
 
 <h1>Counter</h1>
 
-<p>Current count: @currentCount</p>
+<p>Current soil moisture: @_value</p>
 
-<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+<button class="btn btn-primary" @onclick="Connect">Connect</button>
+<button class="btn btn-primary" @onclick="GetSoilMoisture">Refresh</button>
 
 @code {
-    private int currentCount = 0;
 
-    private void IncrementCount()
+    private int _value;
+
+    private void Connect()
     {
-        currentCount++;
+        MessageQueueService.Connect();
+    }
+
+
+    private async Task GetSoilMoisture()
+    {
+        var soilMoisture = await MessageQueueService.GetData();
+        _value = soilMoisture.Value;
+        Console.WriteLine($"value is {_value}");
     }
 
 }

@@ -5,4 +5,9 @@
         <LangVersion>latestmajor</LangVersion>
     </PropertyGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Azure.Messaging.ServiceBus" Version="7.11.0-beta.1" />
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0-rc.1.22426.10" />
+    </ItemGroup>
+
 </Project>
