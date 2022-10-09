@@ -1,11 +1,11 @@
 {
   "version": 3,
   "targets": {
-    "net5.0": {}
+    "net6.0": {}
   },
   "libraries": {},
   "projectFileDependencyGroups": {
-    "net5.0": []
+    "net6.0": []
   },
   "packageFolders": {
     "C:\\Users\\jacob\\.nuget\\packages\\": {},
@@ -32,7 +32,7 @@
         "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
       "originalTargetFrameworks": [
-        "net5.0"
+        "net6.0"
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
@@ -41,8 +41,8 @@
         "https://pkgs.dev.azure.com/jacobenon/NugetDemo/_packaging/BigJacob.NASA.APOD/nuget/v3/index.json": {}
       },
       "frameworks": {
-        "net5.0": {
-          "targetAlias": "net5.0",
+        "net6.0": {
+          "targetAlias": "net6.0",
           "projectReferences": {}
         }
       },
@@ -53,8 +53,8 @@
       }
     },
     "frameworks": {
-      "net5.0": {
-        "targetAlias": "net5.0",
+      "net6.0": {
+        "targetAlias": "net6.0",
         "imports": [
           "net461",
           "net462",
@@ -66,12 +66,6 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "downloadDependencies": [
-          {
-            "name": "Microsoft.NETCore.App.Host.win-x64",
-            "version": "[5.0.17, 5.0.17]"
-          }
-        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
