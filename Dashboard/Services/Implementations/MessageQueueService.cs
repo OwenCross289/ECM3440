@@ -8,51 +8,40 @@ namespace Dashboard.Services.Implementations;
 
 public class MessageQueueService : IMessageQueueService, IAsyncDisposable
 {
-    private const string ConnectionString =
-        "Endpoint=sb://ecm3440.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=BbsLB3LdHT3NuMjh4NBV5jeaKb7lOA8TTkYEIi25wuU=";
-
-    private const string QueueName = "ecm3440-telemetry-queue";
-
-    private readonly ServiceBusClient _client = new(ConnectionString);
-
+    private bool _isRunning = false;
+    private readonly ServiceBusClient _client = new(Constants.ConnectionString);
     private ServiceBusReceiver _receiver;
     public event EventHandler<SoilMoisture> DataReceived;
 
-    public void Connect()
-    {
-        _receiver = _client.CreateReceiver(QueueName);
-    }
+    public void Connect() => _receiver = _client.CreateReceiver(Constants.QueueName);
 
     public async Task Disconnect()
     {
+        _isRunning = false;
         await DisposeAsync();
     }
 
     public async Task EnableDataCollection()
     {
-        while (true)
+        _isRunning = true;
+        while (_isRunning)
         {
             var message = await _receiver.ReceiveMessageAsync();
             var body = message.Body.ToString();
-            Console.WriteLine(body);
-            var soilMoisture = new SoilMoisture
-            {
-                Value = 0
-            };
 
             try
             {
-                soilMoisture = System.Text.Json.JsonSerializer.Deserialize<SoilMoisture>(body);
-                DataReceived?.Invoke(this, soilMoisture);
-                Console.WriteLine(soilMoisture.Value);
+                var soilMoisture = System.Text.Json.JsonSerializer.Deserialize<SoilMoisture>(body);
+                if (soilMoisture is not null)
+                {
+                    DataReceived?.Invoke(this, soilMoisture);
+                }
             }
             catch (Exception)
             {
                 // No-op
             }
         }
-
-        // return soilMoisture;
     }
 
     public async ValueTask DisposeAsync()
