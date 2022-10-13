@@ -1,4 +1,4 @@
-namespace Dashboard.Models;
+namespace Dashboard;
 
 public static class Constants
 {
