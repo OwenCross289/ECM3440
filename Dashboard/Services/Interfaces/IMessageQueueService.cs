@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Dashboard.Models;
@@ -8,5 +9,7 @@ public interface IMessageQueueService
 {
     void Connect();
     Task Disconnect();
-    Task<SoilMoisture> GetData();
+    Task EnableDataCollection();
+
+    public event EventHandler<SoilMoisture> DataReceived;
 }

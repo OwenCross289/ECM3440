@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Dashboard.Models;
 using Dashboard.Services.Interfaces;
@@ -17,26 +16,22 @@ public class MessageQueueService : IMessageQueueService, IAsyncDisposable
     private readonly ServiceBusClient _client = new(ConnectionString);
 
     private ServiceBusReceiver _receiver;
+    public event EventHandler<SoilMoisture> DataReceived;
 
-    private bool _isTransmitting;
-    private bool _isConnected;
-    
     public void Connect()
     {
         _receiver = _client.CreateReceiver(QueueName);
-        _isConnected = true;
     }
 
     public async Task Disconnect()
     {
-        _isTransmitting = false;
-        _isConnected = false;
         await DisposeAsync();
     }
 
-    public async Task<SoilMoisture> GetData()
+    public async Task EnableDataCollection()
     {
-        _isTransmitting = true;
+        while (true)
+        {
             var message = await _receiver.ReceiveMessageAsync();
             var body = message.Body.ToString();
             Console.WriteLine(body);
@@ -48,21 +43,23 @@ public class MessageQueueService : IMessageQueueService, IAsyncDisposable
             try
             {
                 soilMoisture = System.Text.Json.JsonSerializer.Deserialize<SoilMoisture>(body);
+                DataReceived?.Invoke(this, soilMoisture);
                 Console.WriteLine(soilMoisture.Value);
             }
             catch (Exception)
             {
                 // No-op
             }
-
-            return soilMoisture;
         }
+
+        // return soilMoisture;
+    }
 
     public async ValueTask DisposeAsync()
     {
         await _receiver.DisposeAsync();
         await _client.DisposeAsync();
-        
+
         GC.SuppressFinalize(this);
     }
 }

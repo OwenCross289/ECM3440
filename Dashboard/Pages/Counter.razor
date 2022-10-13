@@ -6,24 +6,26 @@
 
 <p>Current soil moisture: @_value</p>
 
-<button class="btn btn-primary" @onclick="Connect">Connect</button>
 <button class="btn btn-primary" @onclick="GetSoilMoisture">Refresh</button>
 
 @code {
-
-    private int _value;
-
-    private void Connect()
-    {
-        MessageQueueService.Connect();
-    }
-
+ 
+     private int _value;
+ 
+     protected override void OnInitialized()
+     {
+         MessageQueueService.Connect();
+         MessageQueueService.DataReceived += (_, moisture) =>
+         {
+             _value = moisture.Value;
+             StateHasChanged();
+             Console.WriteLine($"(ui) value is {_value}");
+         };
+     }
 
     private async Task GetSoilMoisture()
-    {
-        var soilMoisture = await MessageQueueService.GetData();
-        _value = soilMoisture.Value;
-        Console.WriteLine($"value is {_value}");
-    }
-
-}
+     {
+         await MessageQueueService.EnableDataCollection();
+    // _value = soilMoisture.Value;
+     }
+ }
