@@ -1,0 +1,45 @@
+﻿@page "/SoilMoisture"
+@using Dashboard.Services.Interfaces
+@using Dashboard.Models
+@using System.Globalization
+@inject IMessageQueueService MessageQueueService
+
+<h1>Soil Moisture</h1>
+<PageTitle>Soil Moisture</PageTitle>
+
+
+<p>@_output</p>
+
+<button class="btn btn-primary" @onclick="Disconnect">Disconnect</button>
+
+@code {
+
+    private string _output = "Waiting for data...";
+
+    protected override void OnInitialized() => Connect().ConfigureAwait(false);
+
+    private async Task Connect()
+    {
+        await MessageQueueService.Connect();
+        MessageQueueService.DataReceived += MessageQueueServiceOnDataReceived();
+    }
+
+    private async Task Disconnect()
+    {
+        MessageQueueService.DataReceived -= MessageQueueServiceOnDataReceived();
+        await MessageQueueService.Disconnect();
+        
+        await InvokeAsync(() =>
+        {
+            _output = $"Disconnected";
+            StateHasChanged();
+        });
+    }
+
+    private EventHandler<SoilMoisture> MessageQueueServiceOnDataReceived() => async (_, moisture) => await InvokeAsync(() =>
+    {
+        _output = $"Current soil moisture: {moisture.Value.ToString(CultureInfo.CurrentCulture)}";
+        StateHasChanged();
+    });
+
+}
