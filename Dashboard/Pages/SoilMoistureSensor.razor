@@ -21,25 +21,24 @@
     private async Task Connect()
     {
         await MessageQueueService.Connect();
-        MessageQueueService.DataReceived += MessageQueueServiceOnDataReceived();
+        MessageQueueService.DataReceived += MessageQueueServiceOnDataReceived;
     }
 
     private async Task Disconnect()
     {
-        MessageQueueService.DataReceived -= MessageQueueServiceOnDataReceived();
+        MessageQueueService.DataReceived -= MessageQueueServiceOnDataReceived;
         await MessageQueueService.Disconnect();
         
         await InvokeAsync(() =>
         {
-            _output = $"Disconnected";
+            _output = "Disconnected";
             StateHasChanged();
         });
     }
 
-    private EventHandler<SoilMoisture> MessageQueueServiceOnDataReceived() => async (_, moisture) => await InvokeAsync(() =>
+    private async void MessageQueueServiceOnDataReceived(object? _, SoilMoisture moisture)
     {
         _output = $"Current soil moisture: {moisture.Value.ToString(CultureInfo.CurrentCulture)}";
-        StateHasChanged();
-    });
-
+        await InvokeAsync(StateHasChanged);
+    }
 }
