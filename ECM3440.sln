@@ -2,11 +2,11 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoilMoistureSensor", "SoilMoistureSensor\SoilMoistureSensor.csproj", "{402007D2-6A0A-438D-B2FA-9515917A203F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dashboard", "Dashboard\Dashboard.csproj", "{5FB28AA8-90F5-4E4D-AC90-065193C1D9FC}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoilMoistureSensor.Tests", "SoilMoistureSensor.Tests\SoilMoistureSensor.Tests.csproj", "{218AD8C0-C08D-4531-878C-A3A04A5EFEFF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dashboard.Tests", "Dashboard.Tests\Dashboard.Tests.csproj", "{F72F6090-2FDC-4DAB-B5D9-F819E4D568C8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dashboard", "Dashboard\Dashboard.csproj", "{8E9BBA65-214C-40D8-85C3-405775B4EFEC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,10 +18,6 @@ Global
 		{402007D2-6A0A-438D-B2FA-9515917A203F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{402007D2-6A0A-438D-B2FA-9515917A203F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{402007D2-6A0A-438D-B2FA-9515917A203F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5FB28AA8-90F5-4E4D-AC90-065193C1D9FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5FB28AA8-90F5-4E4D-AC90-065193C1D9FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5FB28AA8-90F5-4E4D-AC90-065193C1D9FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5FB28AA8-90F5-4E4D-AC90-065193C1D9FC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{218AD8C0-C08D-4531-878C-A3A04A5EFEFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{218AD8C0-C08D-4531-878C-A3A04A5EFEFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{218AD8C0-C08D-4531-878C-A3A04A5EFEFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -30,5 +26,9 @@ Global
 		{F72F6090-2FDC-4DAB-B5D9-F819E4D568C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F72F6090-2FDC-4DAB-B5D9-F819E4D568C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F72F6090-2FDC-4DAB-B5D9-F819E4D568C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E9BBA65-214C-40D8-85C3-405775B4EFEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E9BBA65-214C-40D8-85C3-405775B4EFEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E9BBA65-214C-40D8-85C3-405775B4EFEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E9BBA65-214C-40D8-85C3-405775B4EFEC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
