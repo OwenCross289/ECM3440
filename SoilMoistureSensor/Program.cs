@@ -1,10 +1,12 @@
-﻿Console.WriteLine("Connecting");
+﻿using SoilMoistureSensor;
+
+Console.WriteLine("Connecting");
 var IoTHubService = new IoTHubService("HostName=ECM3440.azure-devices.net;DeviceId=soil-moisture-sensor;SharedAccessKey=VGlo7rYmMZJVcVaJIehiOgF0QnUCmh3FHFxfpu9RukY=");
 Console.WriteLine("Connected");
+var rand = new Random();
 
 while (true)
 {
-    var rand = new Random();
     var message = new SoilMoistureStatus { Value = rand.NextDouble() * 1023 };
     await IoTHubService.SendAsync(message);
     Console.WriteLine($"Soil Moisture: {message.Value}");

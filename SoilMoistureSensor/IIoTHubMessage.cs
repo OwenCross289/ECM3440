@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace SoilMoistureSensor;
 
-namespace SoilMoistureSensor
-{
-    public interface IIoTHubMessage
-    {
-    }
-}
+ public interface IIoTHubMessage
+ {
+ }
