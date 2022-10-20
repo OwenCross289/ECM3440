@@ -23,4 +23,4 @@ while (true)
 
 // Test project for soil moisture sensor
 // Test project for dashboard
-// Dashboard project
+// Dashboard1 project

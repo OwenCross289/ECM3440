@@ -12,7 +12,7 @@ public class MessageQueueService : IMessageQueueService, IAsyncDisposable
     private readonly ServiceBusClient _client = new(Constants.ConnectionString);
     private ServiceBusReceiver _receiver;
     public event EventHandler<SoilMoisture> DataReceived;
-
+    
     public void Connect() => _receiver = _client.CreateReceiver(Constants.QueueName);
 
     public async Task Disconnect()
@@ -27,22 +27,42 @@ public class MessageQueueService : IMessageQueueService, IAsyncDisposable
         while (_isRunning)
         {
             var message = await _receiver.ReceiveMessageAsync();
-            var body = message.Body.ToString();
+        var body = message.Body.ToString();
+        Console.WriteLine($"Body: {body}");
 
-            try
+        try
+        {
+            var soilMoisture = System.Text.Json.JsonSerializer.Deserialize<SoilMoisture>(body);
+            // Console.WriteLine($"soil moisture value: {soilMoisture.Value}");
+            
+            if (soilMoisture is not null)
             {
-                var soilMoisture = System.Text.Json.JsonSerializer.Deserialize<SoilMoisture>(body);
-                if (soilMoisture is not null)
-                {
                     DataReceived?.Invoke(this, soilMoisture);
-                }
-            }
-            catch (Exception)
-            {
-                // No-op
             }
         }
+            catch (Exception)
+        {
+            Console.WriteLine(ex.Message);
+            // No-op
+        }
+
+        return Task.CompletedTask;
     }
+
+    private Task HandleErrorReceivedAsync(ProcessErrorEventArgs args)
+    {
+        DataReceived?.Invoke(this, new()
+        {
+            Value = 0
+        });
+        
+        return Task.CompletedTask;
+    }
+
+    public async Task Connect()
+        => _processor.StartProcessingAsync();
+
+    public async Task Disconnect() => await DisposeAsync();
 
     public async ValueTask DisposeAsync()
     {

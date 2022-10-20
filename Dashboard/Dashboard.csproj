@@ -2,19 +2,20 @@
 
     <PropertyGroup>
         <TargetFramework>net6.0</TargetFramework>
-        <LangVersion>latestmajor</LangVersion>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Azure.Messaging.ServiceBus" Version="7.11.0-beta.1" />
-      <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.4-beta1.22464.1">
+      <PackageReference Include="Azure.Messaging.ServiceBus" Version="7.11.0" />
+      <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.3">
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       </PackageReference>
       <PackageReference Include="Microsoft.CodeAnalysis.Common" Version="4.4.0-2.final" />
       <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.4.0-2.final" />
       <PackageReference Include="Microsoft.CodeAnalysis.Razor" Version="6.0.10" />
-      <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0-rc.1.22426.10" />
+      <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.4.1" />
     </ItemGroup>
 
 </Project>
