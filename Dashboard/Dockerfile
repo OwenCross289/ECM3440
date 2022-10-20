@@ -1,23 +1,20 @@
-FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
+WORKDIR /app
 EXPOSE 80
 EXPOSE 443
+
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["Dashboard/Dashboard.csproj", "Dashboard/"]
-RUN dotnet restore "Dashboard/Dashboard.csproj"
+COPY ["Dashboard.csproj", "."]
+RUN dotnet restore "Dashboard.csproj"
 COPY . .
-WORKDIR /src/Dashboard
 RUN dotnet build "Dashboard.csproj" -c Release -o /app/build
 
+FROM build AS publish
 RUN dotnet publish "Dashboard.csproj" -c Release -o /app/publish
 
-FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS final
-EXPOSE 80
-EXPOSE 443
+FROM base AS final
 WORKDIR /app
-COPY --from=build /app/publish .
-
-RUN useradd -rm -d /home/appuser -s /bin/bash -g root -G sudo -u 1001 appuser
-USER appuser
-WORKDIR /home/appuser
+COPY --from=publish /app/publish .
 
 ENTRYPOINT ["dotnet", "Dashboard.dll"]
