@@ -18,7 +18,7 @@
                          Items="data"
                          Name="Test name"
                          SeriesType="SeriesType.Line"
-                         XValue="@(data => data.Time)"
+                         XValue="@(data => $"{data.Time:dd/MM/yy H:mm:ss}")"
                          YValue="@(data => (decimal)data.Value)"
         ></ApexPointSeries>
     </ApexChart>
@@ -37,17 +37,17 @@
     {
         new()
         {
-            Time = 0,
+            Time = new DateTime(2022,9,20,12,0,0),
             Value = 0d
         },
         new()
         {
-            Time = 1,
+            Time = new DateTime(2022,9,20,13,0,0),
             Value = 1.5d
         },
         new()
         {
-            Time = 2,
+            Time = new DateTime(2022,9,20,14,0,0),
             Value = 4d
         },
     };
@@ -84,7 +84,7 @@
         {
             new()
             {
-                Time = 3,
+                Time = new DateTime(2022,9,20,15,0,0),
                 Value = 2d
             }
         };
