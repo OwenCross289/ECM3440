@@ -28,4 +28,8 @@
         </PackageReference>
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\SoilMoistureSensor\SoilMoistureSensor.csproj" />
+    </ItemGroup>
+
 </Project>
