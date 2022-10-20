@@ -10,7 +10,7 @@
 
 <p>@_output</p>
 
-<div style="width: 50%; height: 50%">
+<div style="width: 50%; height: 50%;">
     <ApexChart @ref="_chart"
         TItem="SoilMoisture"
                Title="Soil Moisture">
@@ -20,39 +20,20 @@
                          SeriesType="SeriesType.Line"
                          XValue="@(x => $"{x.Time:dd/MM/yy H:mm:ss}")"
                          YValue="@(x => (decimal)x.Value)"
+                         
         ></ApexPointSeries>
     </ApexChart>
 </div>
 
-<button class="btn btn-primary" @onclick="AddPoint">Add Point</button>
 <button class="btn btn-primary" @onclick="Disconnect">Disconnect</button>
 
 @code {
 
     private string _output = "Waiting for data...";
 
-#pragma warning disable CS8618
     private ApexChart<SoilMoisture> _chart;
-#pragma warning restore CS8618
 
-    private readonly List<SoilMoisture> _data = new()
-    {
-        new()
-        {
-            Time = new(2022,9,20,12,0,0),
-            Value = 0d
-        },
-        new()
-        {
-            Time = new(2022,9,20,13,0,0),
-            Value = 1.5d
-        },
-        new()
-        {
-            Time = new(2022,9,20,14,0,0),
-            Value = 4d
-        },
-    };
+    private readonly List<SoilMoisture> _data = new();
 
     protected override void OnInitialized() => Connect().ConfigureAwait(false);
 
@@ -77,22 +58,19 @@
     private async void MessageQueueServiceOnDataReceived(object? _, SoilMoisture moisture)
     {
         _output = $"Current soil moisture: {moisture.Value.ToString(CultureInfo.CurrentCulture)}";
-        await InvokeAsync(StateHasChanged);
-    }
 
-    private async Task AddPoint()
-    {
-        var random = new Random();
-        var newData = new List<SoilMoisture>
+        var newMoisture = new SoilMoisture()
         {
-            new()
-            {
-                Time = DateTime.Now,
-                Value = random.Next(1, 10)
-            }
+            Value = moisture.Value,
+            Time = DateTime.Now
+        };
+        var outputs = new List<SoilMoisture>
+        {
+            newMoisture
         };
 
-        await _chart.AppendDataAsync(newData);
+        await _chart.AppendDataAsync(outputs);
+        
         await InvokeAsync(StateHasChanged);
     }
 }
