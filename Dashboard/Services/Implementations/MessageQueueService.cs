@@ -27,16 +27,14 @@ public class MessageQueueService : IMessageQueueService, IAsyncDisposable
         try
         {
             var soilMoisture = System.Text.Json.JsonSerializer.Deserialize<SoilMoisture>(body);
-            // Console.WriteLine($"soil moisture value: {soilMoisture.Value}");
             
             if (soilMoisture is not null)
             {
-                DataReceived.Invoke(this, soilMoisture);
+                DataReceived?.Invoke(this, soilMoisture);
             }
         }
-        catch (Exception ex)
+        catch (Exception)
         {
-            Console.WriteLine(ex.Message);
             // No-op
         }
 
@@ -54,7 +52,7 @@ public class MessageQueueService : IMessageQueueService, IAsyncDisposable
     }
 
     public async Task Connect()
-        => _processor.StartProcessingAsync();
+        => await _processor.StartProcessingAsync();
 
     public async Task Disconnect() => await DisposeAsync();
 
