@@ -37,17 +37,17 @@
     {
         new()
         {
-            Time = new DateTime(2022,9,20,12,0,0),
+            Time = new(2022,9,20,12,0,0),
             Value = 0d
         },
         new()
         {
-            Time = new DateTime(2022,9,20,13,0,0),
+            Time = new(2022,9,20,13,0,0),
             Value = 1.5d
         },
         new()
         {
-            Time = new DateTime(2022,9,20,14,0,0),
+            Time = new(2022,9,20,14,0,0),
             Value = 4d
         },
     };
@@ -80,12 +80,13 @@
 
     private async Task AddPoint()
     {
+        var random = new Random();
         var newData = new List<SoilMoisture>
         {
             new()
             {
-                Time = new DateTime(2022,9,20,15,0,0),
-                Value = 2d
+                Time = DateTime.Now,
+                Value = random.Next(1, 10)
             }
         };
 
