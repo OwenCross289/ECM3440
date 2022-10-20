@@ -10,11 +10,47 @@
 
 <p>@_output</p>
 
+<div style="width: 50%; height: 50%">
+    <ApexChart @ref="chart"
+        TItem="SoilMoisture"
+               Title="Soil Moisture">
+        <ApexPointSeries TItem="SoilMoisture"
+                         Items="data"
+                         Name="Test name"
+                         SeriesType="SeriesType.Line"
+                         XValue="@(data => data.Time)"
+                         YValue="@(data => (decimal)data.Value)"
+        ></ApexPointSeries>
+    </ApexChart>
+</div>
+
+<button class="btn btn-primary" @onclick="AddPoint">Add Point</button>
 <button class="btn btn-primary" @onclick="Disconnect">Disconnect</button>
 
 @code {
 
     private string _output = "Waiting for data...";
+
+    private ApexChart<SoilMoisture> chart;
+
+    private List<SoilMoisture> data = new()
+    {
+        new()
+        {
+            Time = 0,
+            Value = 0d
+        },
+        new()
+        {
+            Time = 1,
+            Value = 1.5d
+        },
+        new()
+        {
+            Time = 2,
+            Value = 4d
+        },
+    };
 
     protected override void OnInitialized() => Connect().ConfigureAwait(false);
 
@@ -42,4 +78,18 @@
         StateHasChanged();
     });
 
+    private async Task AddPoint()
+    {
+        var newData = new List<SoilMoisture>
+        {
+            new()
+            {
+                Time = 3,
+                Value = 2d
+            }
+        };
+
+        await chart.AppendDataAsync(newData);
+        await InvokeAsync(StateHasChanged);
+    }
 }
