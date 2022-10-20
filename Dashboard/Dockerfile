@@ -1,11 +1,13 @@
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+EXPOSE 80
+EXPOSE 443
 WORKDIR /src
 COPY ["Dashboard/Dashboard.csproj", "Dashboard/"]
 RUN dotnet restore "Dashboard/Dashboard.csproj"
 COPY . .
 WORKDIR /src/Dashboard
 RUN dotnet build "Dashboard.csproj" -c Release -o /app/build
-WORKDIR /app
+
 RUN dotnet publish "Dashboard.csproj" -c Release -o /app/publish
 
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS final
