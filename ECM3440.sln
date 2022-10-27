@@ -1,12 +1,20 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoilMoistureSensor", "SoilMoistureSensor\SoilMoistureSensor.csproj", "{402007D2-6A0A-438D-B2FA-9515917A203F}"
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32228.430
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SoilMoistureSensor", "SoilMoistureSensor\SoilMoistureSensor.csproj", "{402007D2-6A0A-438D-B2FA-9515917A203F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoilMoistureSensor.Tests", "SoilMoistureSensor.Tests\SoilMoistureSensor.Tests.csproj", "{218AD8C0-C08D-4531-878C-A3A04A5EFEFF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SoilMoistureSensor.Tests", "SoilMoistureSensor.Tests\SoilMoistureSensor.Tests.csproj", "{218AD8C0-C08D-4531-878C-A3A04A5EFEFF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dashboard.Tests", "Dashboard.Tests\Dashboard.Tests.csproj", "{F72F6090-2FDC-4DAB-B5D9-F819E4D568C8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dashboard.Tests", "Dashboard.Tests\Dashboard.Tests.csproj", "{F72F6090-2FDC-4DAB-B5D9-F819E4D568C8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dashboard", "Dashboard\Dashboard.csproj", "{8E9BBA65-214C-40D8-85C3-405775B4EFEC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dashboard", "Dashboard\Dashboard.csproj", "{8E9BBA65-214C-40D8-85C3-405775B4EFEC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{09A38B6F-3BE3-441E-BF1D-D38D7CA96742}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,5 +38,11 @@ Global
 		{8E9BBA65-214C-40D8-85C3-405775B4EFEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E9BBA65-214C-40D8-85C3-405775B4EFEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8E9BBA65-214C-40D8-85C3-405775B4EFEC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {55A8EFB1-A013-4A45-8160-4E1960928F6C}
 	EndGlobalSection
 EndGlobal
