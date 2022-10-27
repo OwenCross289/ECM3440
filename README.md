@@ -29,3 +29,8 @@ This project works with a soil moisture sensor emulator. It is part of our ECM34
 - David Scott
 - Jacob Enon
 - Cameron Robinson
+
+## Running Docker
+- Navigate to the Dashboard.csproj folder and run ```docker build -t dashboard .``` from a terminal.
+- Once the build is complete follow up with this command ```docker run -p 8080:80 -d dashboard```.
+- localhost:8080 should have the app running.
