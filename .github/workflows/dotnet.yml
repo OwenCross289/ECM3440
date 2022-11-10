@@ -37,6 +37,11 @@ jobs:
         outputFormat: 'lcov'
         excludes: '[program]*,[test]test.*'
         threshold: 80
+    - name: SoilMoistureSensor Coveralls      
+      uses: coverallsapp/github-action@v1.1.1
+      with:
+        github-token: ${{secrets.GITHUB_TOKEN }} 
+        path-to-lcov: 'SoilMoisture.Tests/TestResults/coverage.info'
     - name: Coverlet Dashboard coverage test
       uses: b3b00/coverlet-action@1.2.4
       with:
@@ -45,3 +50,8 @@ jobs:
         outputFormat: 'lcov'
         excludes: '[program]*,[test]test.*'
         threshold: 80
+    - name: Dashboard Coveralls      
+      uses: coverallsapp/github-action@v1.1.1
+      with:
+        github-token: ${{secrets.GITHUB_TOKEN }} 
+        path-to-lcov: 'Dashboard.Tests/TestResults/coverage.info'
