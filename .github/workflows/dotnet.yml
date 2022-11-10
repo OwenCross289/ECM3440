@@ -2,7 +2,9 @@ name: .NET
 
 on:
   pull_request:
-    branches: [ "main" ]
+    branches:
+    - main
+    - prod
   schedule:
   - cron: 0 0 * * *
 
