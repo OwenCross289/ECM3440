@@ -23,6 +23,6 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
     - name: Test
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test --no-build --verbosity normal --collect:"XPlat Code Coverage"
     - name: Coverlet coverage test
       uses: b3b00/coverlet-action@1.2.4
