@@ -29,6 +29,7 @@ jobs:
       run: cp SoilMoistureSensor.Tests/TestResults/*/coverage.info SoilMoistureSensor.Tests/TestResults/coverage.info
     - name: Copy Dashboard Coverage to Predictable Location
       run: cp Dashboard.Tests/TestResults/*/coverage.info Dashboard.Tests/TestResults/coverage.info
+
     - name: Coverlet SoilMoisture coverage test
       uses: b3b00/coverlet-action@1.2.4
       with:
@@ -37,11 +38,7 @@ jobs:
         outputFormat: 'lcov'
         excludes: '[program]*,[test]test.*'
         threshold: 80
-    - name: SoilMoistureSensor Coveralls      
-      uses: coverallsapp/github-action@v1.1.1
-      with:
-        github-token: ${{secrets.GITHUB_TOKEN }} 
-        path-to-lcov: 'SoilMoistureSensor.Tests/TestResults/coverage.info'
+
     - name: Coverlet Dashboard coverage test
       uses: b3b00/coverlet-action@1.2.4
       with:
@@ -50,8 +47,27 @@ jobs:
         outputFormat: 'lcov'
         excludes: '[program]*,[test]test.*'
         threshold: 0
-    - name: Dashboard Coveralls      
+    
+    - name: Install Report Generator
+      run: dotnet tool install --global dotnet-reportgenerator-globaltool --version 5.1.11
+    - name: Run Report Generator
+      run: reportgenerator -reports:**/coverage.info -targetdir:CoverageReport -reporttypes:lcov
+    
+    - name: Report Coveralls     
       uses: coverallsapp/github-action@v1.1.1
       with:
         github-token: ${{secrets.GITHUB_TOKEN }} 
-        path-to-lcov: 'Dashboard.Tests/TestResults/coverage.info'
+        path-to-lcov: 'CoverageReport/lcov.info'
+
+
+    # - name: SoilMoistureSensor Coveralls     
+    #   uses: coverallsapp/github-action@v1.1.1
+    #   with:
+    #     github-token: ${{secrets.GITHUB_TOKEN }} 
+    #     path-to-lcov: 'SoilMoistureSensor.Tests/TestResults/coverage.info'
+    
+    # - name: Dashboard Coveralls     
+    #   uses: coverallsapp/github-action@v1.1.1
+    #   with:
+    #     github-token: ${{secrets.GITHUB_TOKEN }} 
+    #     path-to-lcov: 'Dashboard.Tests/TestResults/coverage.info'
