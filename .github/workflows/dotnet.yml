@@ -37,7 +37,6 @@ jobs:
         output: 'TestResults/coverage.info'
         outputFormat: 'lcov'
         excludes: '[program]*,[test]test.*'
-        threshold: 80
 
     - name: Coverlet Dashboard coverage test
       uses: b3b00/coverlet-action@1.2.4
@@ -46,7 +45,6 @@ jobs:
         output: 'TestResults/coverage.info'
         outputFormat: 'lcov'
         excludes: '[program]*,[test]test.*'
-        threshold: 0
     
     - name: Install Report Generator
       run: dotnet tool install --global dotnet-reportgenerator-globaltool --version 5.1.11
