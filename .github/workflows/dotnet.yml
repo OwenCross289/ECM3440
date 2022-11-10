@@ -34,3 +34,8 @@ jobs:
         outputFormat: 'lcov'
         excludes: '[program]*,[test]test.*'
         threshold: 80
+    - name: coveralls      
+      uses: coverallsapp/github-action@v1.1.1
+      with:
+        github-token: ${{secrets.GITHUB_TOKEN }} 
+        path-to-lcov: ${{steps.coverlet.outputs.coverageFile}}
