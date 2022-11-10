@@ -10,11 +10,30 @@
 
 <p>@_output</p>
 
+<div style="width: 50%; height: 50%;">
+    <ApexChart @ref="_chart"
+        TItem="SoilMoisture"
+               Title="Soil Moisture">
+        <ApexPointSeries TItem="SoilMoisture"
+                         Items="_data"
+                         Name="Test name"
+                         SeriesType="SeriesType.Line"
+                         XValue="@(x => $"{x.Time:dd/MM/yy H:mm:ss}")"
+                         YValue="@(x => (decimal)x.Value)"
+                         
+        ></ApexPointSeries>
+    </ApexChart>
+</div>
+
 <button class="btn btn-primary" @onclick="Disconnect">Disconnect</button>
 
 @code {
 
     private string _output = "Waiting for data...";
+
+    private ApexChart<SoilMoisture> _chart;
+
+    private readonly List<SoilMoisture> _data = new();
 
     protected override void OnInitialized() => Connect().ConfigureAwait(false);
 
@@ -39,6 +58,19 @@
     private async void MessageQueueServiceOnDataReceived(object? _, SoilMoisture moisture)
     {
         _output = $"Current soil moisture: {moisture.Value.ToString(CultureInfo.CurrentCulture)}";
+
+        var newMoisture = new SoilMoisture()
+        {
+            Value = moisture.Value,
+            Time = DateTime.Now
+        };
+        var outputs = new List<SoilMoisture>
+        {
+            newMoisture
+        };
+
+        await _chart.AppendDataAsync(outputs);
+        
         await InvokeAsync(StateHasChanged);
     }
 }
