@@ -1,7 +1,7 @@
-namespace Dashboard.Models
+namespace Dashboard.Models;
+
+public class SoilMoisture
 {
-    public class SoilMoisture
-    {
-        public double Value { get; init; }
-    }
+   public DateTime Time { get; init; }
+   public double Value { get; init; }
 }
