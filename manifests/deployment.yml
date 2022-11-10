@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: "ecm3440-345c"
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: "ecm3440-345c"
+  template:
+    metadata:
+      labels:
+        app: "ecm3440-345c"
+    spec:
+      containers:
+        - name: "ecm3440-345c"
+          image: "dashboard3440.azurecr.io/ecm3440"
+          ports:
+          - containerPort: 80
