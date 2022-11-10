@@ -49,7 +49,7 @@ jobs:
         output: 'TestResults/coverage.info'
         outputFormat: 'lcov'
         excludes: '[program]*,[test]test.*'
-        threshold: 80
+        threshold: 0
     - name: Dashboard Coveralls      
       uses: coverallsapp/github-action@v1.1.1
       with:
