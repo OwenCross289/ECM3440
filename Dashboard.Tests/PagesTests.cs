@@ -42,6 +42,6 @@ public class PagesTests
         disconnectButton.Click();
 
         // Assert
-        mockService.Received(2).Disconnect();
+        mockService.Received(1).Disconnect();
     }
 }
