@@ -2,6 +2,8 @@
 
 This project works with a soil moisture sensor emulator. It is part of our ECM3440 coursework.
 
+[![Coverage Status](https://coveralls.io/repos/github/OwenCross289/ECM3440/badge.svg?branch=main)](https://coveralls.io/github/OwenCross289/ECM3440?branch=main)
+
 ## Rules
 ### Pushing to Main
 - Nobody can push directly to main
