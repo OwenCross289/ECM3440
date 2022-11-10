@@ -56,16 +56,3 @@ jobs:
       with:
         github-token: ${{secrets.GITHUB_TOKEN }} 
         path-to-lcov: 'CoverageReport/lcov.info'
-
-
-    # - name: SoilMoistureSensor Coveralls     
-    #   uses: coverallsapp/github-action@v1.1.1
-    #   with:
-    #     github-token: ${{secrets.GITHUB_TOKEN }} 
-    #     path-to-lcov: 'SoilMoistureSensor.Tests/TestResults/coverage.info'
-    
-    # - name: Dashboard Coveralls     
-    #   uses: coverallsapp/github-action@v1.1.1
-    #   with:
-    #     github-token: ${{secrets.GITHUB_TOKEN }} 
-    #     path-to-lcov: 'Dashboard.Tests/TestResults/coverage.info'
