@@ -24,18 +24,6 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal --collect:"XPlat Code Coverage" --settings "SoilMoistureSensor.Tests/runsettings.xml"
-    - name: Code Coverage Report
-      uses: irongut/CodeCoverageSummary@v1.3.0
-      with:
-        filename: Dashboard.Tests/TestResults/**/coverage.cobertura.xml
-        badge: true
-        fail_below_min: true
-        format: markdown
-        hide_branch_rate: false
-        hide_complexity: true
-        indicators: true
-        output: both
-        thresholds: '50 80'
     - name: Copy Coverage to Predictable Location
       run: cp TestResults/*/coverage.info TestResults/coverage.info
     - name: Coverlet coverage test
@@ -45,4 +33,4 @@ jobs:
         output: 'TestResults/coverage.info'
         outputFormat: 'lcov'
         excludes: '[program]*,[test]test.*'
-        threshold: 50
+        threshold: 10
