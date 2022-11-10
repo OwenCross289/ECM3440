@@ -6,6 +6,7 @@ html, body {
 
 h1:focus {
     outline: none;
+    color: #0a53be;
 }
 
 a, .btn-link {
