@@ -22,10 +22,12 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
     - name: Test
-      run: dotnet test --no-build --verbosity normal --collect:"XPlat Code Coverage" --settings "SoilMoistureSensor.Tests/runsettings.xml"
-    - name: Copy Coverage to Predictable Location
+      run: dotnet test --no-build --verbosity normal --collect:"XPlat Code Coverage" --settings "runsettings.xml"
+    - name: Copy SoilMoisture Coverage to Predictable Location
       run: cp SoilMoistureSensor.Tests/TestResults/*/coverage.info SoilMoistureSensor.Tests/TestResults/coverage.info
-    - name: Coverlet coverage test
+    - name: Copy Dashboard Coverage to Predictable Location
+      run: cp Dashboard.Tests/TestResults/*/coverage.info Dashboard.Tests/TestResults/coverage.info
+    - name: Coverlet SoilMoisture coverage test
       uses: b3b00/coverlet-action@1.2.4
       with:
         testProject: 'SoilMoistureSensor.Tests/SoilMoistureSensor.Tests.csproj'
@@ -33,8 +35,11 @@ jobs:
         outputFormat: 'lcov'
         excludes: '[program]*,[test]test.*'
         threshold: 80
-    - name: coveralls      
-      uses: coverallsapp/github-action@v1.1.1
+    - name: Coverlet Dashboard coverage test
+      uses: b3b00/coverlet-action@1.2.4
       with:
-        github-token: ${{secrets.GITHUB_TOKEN }} 
-        path-to-lcov: 'SoilMoistureSensor.Tests/TestResults/coverage.info'
+        testProject: 'Dashboard.Tests/Dashboard.Tests.csproj'
+        output: 'TestResults/coverage.info'
+        outputFormat: 'lcov'
+        excludes: '[program]*,[test]test.*'
+        threshold: 80
