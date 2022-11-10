@@ -30,7 +30,7 @@ jobs:
       uses: b3b00/coverlet-action@1.2.4
       with:
         testProject: 'SoilMoistureSensor.Tests/SoilMoistureSensor.Tests.csproj'
-        output: 'SoilMoistureSensor.Tests/TestResults/coverage.info'
+        output: 'TestResults/coverage.info'
         outputFormat: 'lcov'
         excludes: '[program]*,[test]test.*'
         threshold: 10
