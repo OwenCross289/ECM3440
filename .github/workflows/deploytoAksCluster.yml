@@ -1,0 +1,50 @@
+on: [push]
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    
+    - uses: azure/docker-login@v1
+      with:
+        login-server: dashboard3440.azurecr.io
+        username: ${{ secrets.acr_dashboard3440_username }}
+        password: ${{ secrets.acr_dashboard3440_password }}
+    
+    - name: Build and push image to ACR
+      id: build-image
+      run: |
+        docker build "$GITHUB_WORKSPACE/Dashboard" -f  "Dashboard/Dockerfile" -t dashboard3440.azurecr.io/ecm3440:${{ github.sha }} --label dockerfile-path=Dashboard/Dockerfile
+        docker push dashboard3440.azurecr.io/ecm3440:${{ github.sha }}
+    
+    - uses: azure/k8s-set-context@v1
+      with:
+         kubeconfig: ${{ secrets.aks_ecm3440_kubeConfig }}
+      id: login
+    
+    - name: Create namespace
+      run: |
+        namespacePresent=`kubectl get namespace | grep ecm3440prod | wc -l`
+        if [ $namespacePresent -eq 0 ]
+        then
+            echo `kubectl create namespace ecm3440prod`
+        fi
+
+    - uses: azure/k8s-create-secret@v1
+      with:
+        namespace: ecm3440prod
+        container-registry-url: dashboard3440.azurecr.io
+        container-registry-username: ${{ secrets.acr_dashboard3440_username }}
+        container-registry-password: ${{ secrets.acr_dashboard3440_password }}
+        secret-name: ecm3440dockerauth
+       
+    - uses: azure/k8s-deploy@v1.2
+      with:
+        namespace: ecm3440prod
+        manifests: |
+          manifests/deployment.yml
+          manifests/service.yml
+        images: |
+          dashboard3440.azurecr.io/ecm3440:${{ github.sha }}
+        imagepullsecrets: |
+          ecm3440dockerauth
