@@ -24,11 +24,11 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal --collect:"XPlat Code Coverage" --settings "SoilMoistureSensor.Tests/runsettings.xml"
-    - name: Coverlet coverage test
-      uses: b3b00/coverlet-action@1.2.4
-      with:
-        testProject: 'SoilMoistureSensor.Tests/SoilMoistureSensor.Tests.csproj'
-        output: '**/coverage.info'
-        outputFormat: 'lcov'
-        excludes: '[program]*,[test]test.*'
-        threshold: 50
+    # - name: Coverlet coverage test
+    #   uses: b3b00/coverlet-action@1.2.4
+    #   with:
+    #     testProject: 'SoilMoistureSensor.Tests/SoilMoistureSensor.Tests.csproj'
+    #     output: '**/coverage.info'
+    #     outputFormat: 'lcov'
+    #     excludes: '[program]*,[test]test.*'
+    #     threshold: 50
