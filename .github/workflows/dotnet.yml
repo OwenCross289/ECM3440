@@ -25,12 +25,12 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal --collect:"XPlat Code Coverage" --settings "SoilMoistureSensor.Tests/runsettings.xml"
     - name: Copy Coverage to Predictable Location
-      run: cp TestResults/*/coverage.info TestResults/coverage.info
+      run: cp SoilMoistureSensor.Tests/TestResults/*/coverage.info SoilMoistureSensor.Tests/TestResults/coverage.info
     - name: Coverlet coverage test
       uses: b3b00/coverlet-action@1.2.4
       with:
         testProject: 'SoilMoistureSensor.Tests/SoilMoistureSensor.Tests.csproj'
-        output: 'TestResults/coverage.info'
+        output: 'SoilMoistureSensor.Tests/TestResults/coverage.info'
         outputFormat: 'lcov'
         excludes: '[program]*,[test]test.*'
         threshold: 10
