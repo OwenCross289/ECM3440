@@ -33,4 +33,4 @@ jobs:
         output: 'TestResults/coverage.info'
         outputFormat: 'lcov'
         excludes: '[program]*,[test]test.*'
-        threshold: 10
+        threshold: 80
