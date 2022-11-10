@@ -2,28 +2,27 @@ using Bunit;
 using Dashboard.Pages;
 using Dashboard.Services.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
-using Moq;
+using NSubstitute;
 
 namespace Dashboard.Tests;
 
 public class PagesTests
 {
     [Fact]
-    public void ConnectOnStartup()
+    public void GIVEN_ServiceIsNotConnected_WHEN_PageIsRendered_THEN_ServiceIsConnected()
     {
         // Arrange
         using var context = new TestContext();
         context.JSInterop.Mode = JSRuntimeMode.Loose;
         
-        var mockService = new Mock<IMessageQueueService>();
-        mockService.Setup(x => x.Connect());
-        context.Services.AddSingleton(mockService.Object);
+        var mockService = Substitute.For<IMessageQueueService>();
+        context.Services.AddSingleton(mockService);
         
         // Act
         context.RenderComponent<SoilMoistureSensor>();
 
         // Assert
-        mockService.VerifyAll(); 
+        mockService.Received(1).Connect();
     }
     
     [Fact]
@@ -33,9 +32,8 @@ public class PagesTests
         using var context = new TestContext();
         context.JSInterop.Mode = JSRuntimeMode.Loose;
         
-        var mockService = new Mock<IMessageQueueService>();
-        mockService.Setup(x => x.Disconnect());
-        context.Services.AddSingleton(mockService.Object);
+        var mockService = Substitute.For<IMessageQueueService>();
+        context.Services.AddSingleton(mockService);
         
         var sut = context.RenderComponent<SoilMoistureSensor>();
         var disconnectButton = sut.Find("button");
@@ -44,6 +42,6 @@ public class PagesTests
         disconnectButton.Click();
 
         // Assert
-        mockService.VerifyAll();
+        mockService.Received(2).Disconnect();
     }
 }
