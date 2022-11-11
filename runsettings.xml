@@ -5,7 +5,7 @@
             <DataCollector friendlyName="XPlat code coverage">
                 <Configuration>
                     <Format>lcov,cobertura</Format>
-                    <ExcludeByFile>**/Shared/*.razor,**/_Host.cshtml,**/_Layout.cshtml,**/_Error.cshtml,</ExcludeByFile>
+                    <ExcludeByFile>**/Shared/*.razor,**/_Host.cshtml,**/_Layout.cshtml,**/*Error.cshtml*</ExcludeByFile>
                 </Configuration>
             </DataCollector>
         </DataCollectors>
