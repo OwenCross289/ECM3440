@@ -1,10 +1,16 @@
 name: .NET
 
 on:
-  [push, pull_request]:
-    branches:
-    - main
-    - prod
+  push:
+    branches:    
+      - 'main'
+      - 'prod'
+
+  pull_request:
+    branches:    
+      - 'main'
+      - 'prod'
+
   schedule:
   - cron: 0 0 * * *
 
