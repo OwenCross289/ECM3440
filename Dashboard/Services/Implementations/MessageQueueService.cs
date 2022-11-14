@@ -1,9 +1,11 @@
+using System.Diagnostics.CodeAnalysis;
 using Dashboard.Models;
 using Dashboard.Services.Interfaces;
 using Azure.Messaging.ServiceBus;
 
 namespace Dashboard.Services.Implementations;
 
+[ExcludeFromCodeCoverage]
 public class MessageQueueService : IMessageQueueService, IAsyncDisposable
 {
     private readonly ServiceBusClient _client = new(Constants.ConnectionString);
