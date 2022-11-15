@@ -1,10 +1,11 @@
 name: .NET
 
 on:
-  pull_request:
+  push:
     branches:    
       - 'main'
       - 'prod'
+      - 'ECM-53-ActionOnPushToMain'
 
   schedule:
   - cron: 0 0 * * *
