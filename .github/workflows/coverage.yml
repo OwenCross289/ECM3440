@@ -7,30 +7,27 @@ on:
       - 'prod'
       - 'ECM-53-ActionOnPushToMain'
 
-  schedule:
-  - cron: 0 0 * * *
-
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    # runs-on: ubuntu-latest
 
-    steps:
-    - uses: actions/checkout@v3
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: 6.0.x
-    - name: Restore dependencies
-      run: dotnet restore
-    - name: Build
-      run: dotnet build --no-restore
-    - name: Test
-      run: dotnet test --no-build --verbosity normal --collect:"XPlat Code Coverage" --settings "runsettings.xml"
-    - name: Copy SoilMoisture Coverage to Predictable Location
-      run: cp SoilMoistureSensor.Tests/TestResults/*/coverage.info SoilMoistureSensor.Tests/TestResults/coverage.info
-    - name: Copy Dashboard Coverage to Predictable Location
-      run: cp Dashboard.Tests/TestResults/*/coverage.info Dashboard.Tests/TestResults/coverage.info
+    # steps:
+    # - uses: actions/checkout@v3
+    # - name: Setup .NET
+    #   uses: actions/setup-dotnet@v3
+    #   with:
+    #     dotnet-version: 6.0.x
+    # - name: Restore dependencies
+    #   run: dotnet restore
+    # - name: Build
+    #   run: dotnet build --no-restore
+    # - name: Test
+    #   run: dotnet test --no-build --verbosity normal --collect:"XPlat Code Coverage" --settings "runsettings.xml"
+    # - name: Copy SoilMoisture Coverage to Predictable Location
+    #   run: cp SoilMoistureSensor.Tests/TestResults/*/coverage.info SoilMoistureSensor.Tests/TestResults/coverage.info
+    # - name: Copy Dashboard Coverage to Predictable Location
+    #   run: cp Dashboard.Tests/TestResults/*/coverage.info Dashboard.Tests/TestResults/coverage.info
 
     - name: Coverlet SoilMoisture coverage test
       uses: b3b00/coverlet-action@1.2.4
