@@ -33,10 +33,10 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal --collect:"XPlat Code Coverage" --settings "runsettings.xml"
 
-    # - name: Copy SoilMoisture Coverage to Predictable Location
-    #   run: cp SoilMoistureSensor.Tests/TestResults/*/coverage.info SoilMoistureSensor.Tests/TestResults/coverage.info
-    # - name: Copy Dashboard Coverage to Predictable Location
-    #   run: cp Dashboard.Tests/TestResults/*/coverage.info Dashboard.Tests/TestResults/coverage.info
+    - name: Copy SoilMoisture Coverage to Predictable Location
+      run: cp SoilMoistureSensor.Tests/TestResults/*/coverage.info SoilMoistureSensor.Tests/TestResults/coverage.info
+    - name: Copy Dashboard Coverage to Predictable Location
+      run: cp Dashboard.Tests/TestResults/*/coverage.info Dashboard.Tests/TestResults/coverage.info
 
     - name: Coverlet SoilMoisture coverage test
       uses: b3b00/coverlet-action@1.2.4
